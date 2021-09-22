@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Trabalho de Computação Gráfica – WebGL</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, max-scale=1.0">
+    <script src="codigo.js"></script>
+    <script id="meu_vertex_shader" type="vertex-shader">
+        #version 300 es
+        precision highp float; 
+        in vec3 in_posicao;
+        out vec3 pos, cor; // nossa variável uniform aqui no shader 
+        uniform float a; 
+        uniform float b;
+        uniform float c;
+        uniform float d;
+
+        void main(void) { 
+        pos = in_posicao;
+        
+        cor = vec3( 1.0, 0.0, 0.0 ); // r, g, b
+        pos.x =pos.x + a;
+        pos.y =pos.y + b; //altera posição 
+        pos.x =pos.x * c;
+        pos.y =pos.y * d;
+        gl_Position = vec4(pos, 1.0); // output 
+        }
+    </script>
+    <script id="meu_fragment_shader" type="fragment-shader">
+        #version 300 es
+        precision highp float;
+        in vec3 pos, cor;
+        out vec4 cor_pixel;
+            void main ()
+             { 
+                 cor_pixel = vec4( cor, 1.0 );
+             }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="main()">
+
+    <div class="chefe" >
+    <div>
+        <h1>Trabalho de Computação Grafica WEBGL</h1>
+    </div>
+        <div class= "pai">
+            <div class="div_canvas">
+            <div>       
+                <canvas id="area" width="400" height="400"> </canvas>
+            </div>
+            <div>
+                <button class ="button" onclick="clean()">Resetar</button>
+            </div>
+        </div>  
+         <div class= "buttons">
+            <div>
+            <p>Translação</p>
+                <input type="number" id="a" value="0.0" step="0.1">
+                <input type="number" id="b" value="0.0" step="0.1">
+            </div>
+            <div>
+            <p>Escala</p>
+                <input type="number" id="c" value ="0.3" step="0.1">
+                <input type="number" id="d" value ="0.3" step="0.1">
+            </div>
+        
+        </div>
+        </div>
+        
+    </div>
+</body>
+
+</html>
